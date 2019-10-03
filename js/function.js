@@ -10,13 +10,13 @@ function renderRow(target, data) {
         }
         if (!obj.income ||
             !obj.expense) {
-            return '0';
-        }
+            
+            }
         if (quantity === 12) {
             break;
         }
         if (obj.month) {
-            HTML += `<div id="row" class="table-row">
+            HTML += `<div class="table-row">
                         <div class="cell">${obj.month}</div>
                         <div class="cell">Sausis</div>
                         <div class="cell">${obj.income} Eur</div>
