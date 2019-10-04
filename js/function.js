@@ -7,7 +7,7 @@ function renderData(
     maxExpenseTarget,
     data,
     months
-  ) {
+    ) {
     let rowsHTML = '';
     let totalIncome = 0;
     let totalExpense = 0;
@@ -41,7 +41,23 @@ function renderData(
       totalExpense += expense;
       totalBalance += income - expense;
 
-      
+      if (income >= maxIncome.value) {
+        maxIncome.value = income;
+        maxIncome.month = month;
+      }
+      if (expense >= maxExpense.value) {
+        maxExpense.value = expense;
+        maxExpense.month = month;
+      }
+      if (expense <= minExpense.value && expense > 0) {
+        minExpense.value = expense;
+        minExpense.month = month;
+      }
+      if (income <= minIncome.value && income > 0) {
+        minIncome.value = income;
+        minIncome.month = month;
+      }
+
 
       if (month) {
         rowsHTML += `<div class="table-row">
@@ -55,7 +71,7 @@ function renderData(
       }
     });
     
-const totalsHTML = `
+    const totalsHTML = `
                 <div class="cell"></div>
                 <div class="cell"></div>
                 <div class="cell">${totalIncome} Eur</div>
@@ -65,6 +81,11 @@ const totalsHTML = `
   
     document.getElementById(rowTarget).innerHTML = rowsHTML;
     document.getElementById(totalsTarget).innerHTML = totalsHTML;
+    
+    document.getElementById(minIncomeTarget).innerHTML = months[minIncome.month - 1];
+    document.getElementById(maxIncomeTarget).innerHTML = months[maxIncome.month - 1];
+    document.getElementById(minExpenseTarget).innerHTML = months[minExpense.month - 1];
+    document.getElementById(maxExpenseTarget).innerHTML = months[maxExpense.month - 1];
   }
   
 
