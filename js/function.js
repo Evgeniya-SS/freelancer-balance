@@ -1,33 +1,59 @@
-function renderRow(target, data) {
-    let HTML = '';
-    let income = 0;
-    let expense = 0;
-    let balance = 0;
+function renderData(
+    rowTarget,
+    totalsTarget,
+    minIncomeTarget,
+    maxIncomeTarget,
+    minExpenseTarget,
+    maxExpenseTarget,
+    data,
+    months
+  ) {
+    let rowsHTML = '';
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let totalBalance = 0;
+    const maxExpense = {
+      month: '',
+      value: 0,
+    };
+    const maxIncome = {
+      month: '',
+      value: 0,
+    };
+    const minExpense = {
+      month: '',
+      value: 999999999,
+    };
+    const minIncome = {
+      month: '',
+      value: 999999999,
+    };
+  
+    account.forEach(({month, income, expense}) => {
+      if (!income) {
+        income = 0;
+      }
+      if (!expense) {
+        expense = 0;
+      }
+      
+      
+  
+      if (month) {
+        rowsHTML += `<div class="table-row">
+                                <div class="cell">${month}</div>
+                                <div class="cell">${months[month - 1]}</div>
+                                <div class="cell">${income} Eur</div>
+                                <div class="cell">${expense} Eur</div>
+                                <div class="cell">${income - expense} Eur</div>
+                            </div>`
+  
+      }
+    });
     
-
-    for (i=0; i<data.length; i++) {
-        const obj = data[i];
-        
-        if (!obj.income || !obj.expense){
-            obj.income = 0;
-            obj.expense = 0;
-        }
-
-            
-        if (obj.month) {
-            HTML += `<div class="table-row">
-                        <div class="cell">${obj.month}</div>
-                        <div class="cell">Sausis</div>
-                        <div class="cell">${obj.income} Eur</div>
-                        <div class="cell">${obj.expense} Eur</div>
-                        <div class="cell">${obj.income - obj.expense} Eur</div>
-                    </div>`
-            
-        }
-        
-    }
-    return document.getElementById(target).innerHTML = HTML;
-}
-
-
+  
+    document.getElementById(rowTarget).innerHTML = rowsHTML;
+    
+  }
+  
 
