@@ -51,9 +51,16 @@ function renderData(
       }
     });
     
+const totalsHTML = `
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell">${totalIncome} Eur</div>
+                <div class="cell">${totalExpense} Eur</div>
+                <div class="cell">${totalBalance} Eur</div>
+                `;
   
     document.getElementById(rowTarget).innerHTML = rowsHTML;
-    
+    document.getElementById(totalsTarget).innerHTML = totalsHTML;
   }
   
 
