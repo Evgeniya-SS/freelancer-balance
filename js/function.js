@@ -36,9 +36,13 @@ function renderData(
       if (!expense) {
         expense = 0;
       }
+            
+      totalIncome += income;
+      totalExpense += expense;
+      totalBalance += income - expense;
+
       
-      
-  
+
       if (month) {
         rowsHTML += `<div class="table-row">
                                 <div class="cell">${month}</div>
